@@ -18,12 +18,6 @@ from json import encoder
 import logging
 
 import os
-os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"   
-os.environ["CUDA_VISIBLE_DEVICES"]="0"
-
-#from setting import Setting
-#from trainer import FlashbackTrainer
-#from network import create_h0_strategy, RnnFactory
 
 encoder.FLOAT_REPR = lambda o: format(o, '.3f')
 
@@ -270,8 +264,7 @@ if __name__ == '__main__':
     parser.add_argument('--attn_type', type=str, default='dot', choices=['general', 'concat', 'dot'])
     parser.add_argument('--data_path', type=str, default='../data/Foursquare')
     parser.add_argument('--save_path', type=str, default='../out/')
-    parser.add_argument('--model_mode', type=str, default='attn_avg_long_user',
-                        choices=['simple', 'simple_long', 'attn_avg_long_user', 'attn_local_long'])
+    parser.add_argument('--model_mode', type=str, default='attn_avg_long_user')
     parser.add_argument('--load_checkpoint', type=int, default=None)  # checkpoint to load
 
     parser.add_argument('--model_method', type=int, default=0) # model_method = 0(G0E) 1(L2E) 2(G2E) 3(G5E)
@@ -280,7 +273,6 @@ if __name__ == '__main__':
     parser.add_argument('--jump_method', type=str, default='gru')
     parser.add_argument('--jump_time', type=int, default=2)
     parser.add_argument('--pretrain', type=int, default=1)
-
 
     parser.add_argument('--lambda_t', default=0.1, type=float, help='decay factor for temporal data')
     parser.add_argument('--lambda_s', default=100, type=float, help='decay factor for spatial data')
